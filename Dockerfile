@@ -1,12 +1,11 @@
-# Alpine Linux with OpenJDK JRE
-FROM openjdk:8-jre
+# Alpine Linux with Oracle JRE
+FROM sgrio/java:jre_8
 
-#RUN apk add --no-cache curl bash gawk sed grep bc coreutils
-RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-    openjfx \
-    unzip \
-    && rm -f /var/lib/apt/lists/*_dists_*
+RUN apk add --no-cache curl bash gawk sed grep bc coreutils
+#RUN apt-get update \
+#    && apt-get install --no-install-recommends -y \
+#    unzip \
+#    && rm -f /var/lib/apt/lists/*_dists_*
 
 # Set the working directory to /app
 WORKDIR /app
@@ -23,4 +22,3 @@ EXPOSE 8181
 VOLUME /files
 
 CMD ["/app/kmttg", "-a"]
-
