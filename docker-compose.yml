@@ -2,8 +2,15 @@ version: "3.8"
 services:
   kmttg:
     image: drnay/kmttg:latest
+    volumes:
+      - kmttg_app:/home/kmttg/app
+      - kmttg_files:/files
+      - kmttg_out:/home/kmttg/out
     environment:
       - DISPLAY=novnc:0.0
+      - TZ=America/Los_Angeles
+    ports:
+      - "8181:8181"
     depends_on:
       - novnc
     networks:
@@ -22,3 +29,7 @@ services:
       - x11
 networks:
   x11:
+volumes:
+  kmttg_app:
+  kmttg_files:
+  kmttg_out:
