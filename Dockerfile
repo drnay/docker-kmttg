@@ -39,8 +39,9 @@ USER kmttg
 WORKDIR /home/kmttg/app
 
 # dowlnoad kmttg
-RUN curl -L https://sourceforge.net/projects/kmttg/files/latest/download | busybox unzip -o - \
-    && chmod +x /home/kmttg/app/kmttg \
+RUN curl -L https://sourceforge.net/projects/kmttg/files/latest/download -o /home/kmttg/app/kmttg.zip \
+    && unzip -o /home/kmttg/app/kmttg.zip \
+    && rm -f /home/kmttg/app/kmttg.zip \
     && mkdir -p /home/kmttg/app/web/cache \
     && mkdir -p /home/kmttg/out
 
