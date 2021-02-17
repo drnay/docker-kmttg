@@ -36,13 +36,12 @@ RUN addgroup -g 10001 -S kmttg \
 USER kmttg
 
 # Set the working directory to /home/kmttg/app
+RUN mkdir -p /home/kmttg/app/web/cache
 WORKDIR /home/kmttg/app
 
 # dowlnoad kmttg
-RUN curl -L https://sourceforge.net/projects/kmttg/files/latest/download -o /home/kmttg/app/kmttg.zip \
-    && unzip -o /home/kmttg/app/kmttg.zip \
-    && rm -f /home/kmttg/app/kmttg.zip \
-    && mkdir -p /home/kmttg/app/web/cache \
+RUN curl -L https://sourceforge.net/projects/kmttg/files/latest/download | busybox unzip -o - \
+    && chmod +x /home/kmttg/app/kmttg \
     && mkdir -p /home/kmttg/out
 
 COPY --chown=kmttg config.ini /home/kmttg/app/config.ini
